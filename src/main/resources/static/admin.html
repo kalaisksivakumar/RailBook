@@ -1,0 +1,457 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RailBook - Admin Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f3f6fb;
+            color: #263449;
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: #142d4e;
+            color: white;
+            padding: 22px 5%;
+        }
+
+        header h1 {
+            margin: 0 0 5px;
+        }
+
+        header p {
+            margin: 0;
+            color: #d3deed;
+        }
+
+        nav {
+            background: white;
+            padding: 15px 5%;
+            display: flex;
+            gap: 28px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #23466e;
+            font-weight: 600;
+        }
+
+        main {
+            width: 92%;
+            max-width: 1250px;
+            margin: 30px auto;
+        }
+
+        main section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 14px rgba(0,0,0,0.05);
+        }
+
+        main h2 {
+            color: #17395f;
+            margin: 0 0 22px;
+            padding-bottom: 13px;
+            border-bottom: 2px solid #edf1f6;
+        }
+
+        hr {
+            display: none;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .stat-card {
+            background: #f1f6fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2874c7;
+        }
+
+        .stat-card h3 {
+            font-size: 15px;
+            color: #53677f;
+            margin: 0 0 12px;
+        }
+
+        .stat-card p {
+            font-size: 30px;
+            font-weight: bold;
+            color: #17395f;
+            margin: 0;
+        }
+
+        #addTrainForm {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #344a63;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #ccd6e2;
+            border-radius: 7px;
+            font-size: 14px;
+            background: white;
+            color: #263449;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #2874c7;
+            box-shadow: 0 0 0 3px rgba(40,116,199,0.1);
+        }
+
+        button {
+            border: none;
+            background: #2168ad;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 4px 5px 4px 0;
+        }
+
+        button:hover {
+            background: #174d85;
+        }
+
+        #addTrainForm button {
+            width: fit-content;
+            min-width: 130px;
+        }
+
+        .search-row {
+            display: flex;
+            align-items: end;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .search-row .form-group {
+            flex: 1;
+            min-width: 220px;
+            margin: 0;
+        }
+
+        .search-row button {
+            min-width: 90px;
+            height: 42px;
+        }
+
+        .secondary-button {
+            background: #64748b;
+        }
+
+        .secondary-button:hover {
+            background: #475569;
+        }
+
+        .export-button {
+            background: #16845c;
+        }
+
+        .export-button:hover {
+            background: #116744;
+        }
+
+        #trainList,
+        #trainAvailabilityReport,
+        #adminBookingList {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 650px;
+        }
+
+        th {
+            background: #eaf1f9;
+            color: #17395f;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #e8edf3;
+        }
+
+        footer {
+            background: #142d4e;
+            color: white;
+            text-align: center;
+            padding: 18px;
+        }
+
+        @media (max-width: 800px) {
+            .dashboard-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 550px) {
+            main {
+                width: 95%;
+            }
+
+            main section {
+                padding: 16px;
+            }
+
+            #addTrainForm {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .search-row {
+                align-items: stretch;
+            }
+
+            .search-row button {
+                flex: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <h1>🚆 RailBook</h1>
+        <p>Admin Dashboard</p>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="booking-history.html">Booking History</a>
+        <a href="/logout">Logout</a>
+    </nav>
+
+    <main>
+
+        <!-- DASHBOARD OVERVIEW -->
+        <section>
+            <h2>📊 Dashboard Overview</h2>
+
+            <button type="button" onclick="loadAdminDashboard()">
+                ↻ Refresh Dashboard
+            </button>
+
+            <div class="dashboard-stats">
+
+                <div class="stat-card">
+                    <h3>Total Trains</h3>
+                    <p id="totalTrains">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Total Bookings</h3>
+                    <p id="totalBookings">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Confirmed Bookings</h3>
+                    <p id="confirmedBookings">0</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Cancelled Bookings</h3>
+                    <p id="cancelledBookings">0</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ADD TRAIN -->
+        <section>
+            <h2>🚆 Add New Train</h2>
+
+            <form id="addTrainForm">
+
+                <div class="form-group">
+                    <label for="trainNumber">Train Number</label>
+                    <input type="text" id="trainNumber"
+                        placeholder="Enter train number" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="trainName">Train Name</label>
+                    <input type="text" id="trainName"
+                        placeholder="Enter train name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="source">Source</label>
+                    <input type="text" id="source"
+                        placeholder="Enter source station" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Destination</label>
+                    <input type="text" id="destination"
+                        placeholder="Enter destination station" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="totalSeats">Total Seats</label>
+                    <input type="number" id="totalSeats"
+                        placeholder="Enter total seats"
+                        min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="departureTime">Departure Time</label>
+                    <input type="time" id="departureTime" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="arrivalTime">Arrival Time</label>
+                    <input type="time" id="arrivalTime" required>
+                </div>
+
+                <div>
+                    <button type="submit">+ Add Train</button>
+                    <p id="addTrainMessage"></p>
+                </div>
+
+            </form>
+        </section>
+
+        <!-- TRAIN MANAGEMENT -->
+        <section>
+            <h2>🚉 Train Management</h2>
+
+            <div class="search-row">
+
+                <div class="form-group">
+                    <label for="trainSearch">Search Train</label>
+                    <input type="text" id="trainSearch"
+                        placeholder="Train number or train name">
+                </div>
+
+                <button type="button" onclick="searchAdminTrains()">
+                    Search
+                </button>
+
+                <button type="button"
+                    class="secondary-button"
+                    onclick="clearTrainSearch()">
+                    Clear
+                </button>
+
+            </div>
+
+            <div id="trainList"></div>
+        </section>
+
+        <!-- TRAIN AVAILABILITY -->
+        <section>
+            <h2>📋 Train Availability Report</h2>
+
+            <div id="trainAvailabilityReport">
+                Loading train availability...
+            </div>
+        </section>
+
+        <!-- BOOKING MANAGEMENT -->
+        <section>
+            <h2>🎫 Booking Management</h2>
+
+            <div class="search-row">
+
+                <div class="form-group">
+                    <label for="bookingSearch">Search Booking</label>
+                    <input type="text" id="bookingSearch"
+                        placeholder="PNR, passenger name or train name">
+                </div>
+
+                <div class="form-group">
+                    <label for="bookingStatusFilter">Booking Status</label>
+
+                    <select id="bookingStatusFilter">
+                        <option value="ALL">All Bookings</option>
+                        <option value="CONFIRMED">Confirmed</option>
+                        <option value="CANCELLED">Cancelled</option>
+                    </select>
+                </div>
+
+                <button type="button" onclick="searchAdminBookings()">
+                    Search
+                </button>
+
+                <button type="button"
+                    class="secondary-button"
+                    onclick="resetBookingFilters()">
+                    Reset
+                </button>
+
+                <button type="button"
+                    class="export-button"
+                    onclick="exportBookingsToCSV()">
+                    ↓ Export CSV
+                </button>
+
+            </div>
+
+            <div id="adminBookingList"></div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 RailBook Railway Reservation System</p>
+    </footer>
+
+    <script src="admin.js"></script>
+
+</body>
+</html>

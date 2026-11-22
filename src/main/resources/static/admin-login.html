@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailBook - Admin Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🚆 RailBook</h1>
+    <p>Admin Login</p>
+</header>
+
+<main>
+    <div class="login-container">
+
+        <h2>Admin Login</h2>
+        <p>Login to manage railway bookings</p>
+
+        <form action="/login" method="POST">
+
+            <label for="username">Username</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="Enter username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Enter password"
+                required
+            >
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <p id="errorMessage" style="color:red;">
+            <script>
+                if (window.location.search.includes("error")) {
+                    document.write("Invalid username or password!");
+                }
+            </script>
+        </p>
+
+        <a href="index.html">Back to Home</a>
+
+    </div>
+</main>
+
+</body>
+</html>

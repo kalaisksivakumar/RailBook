@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailBook - Booking History</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <h2>🚆 RailBook</h2>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="my-bookings.html">My Bookings</a>
+            <a href="booking-history.html">Booking History</a>
+        </div>
+    </nav>
+
+    <div class="history-container">
+
+        <h1>My Booking History</h1>
+        <p>View and manage all your train bookings.</p>
+
+        <button onclick="loadBookings()">Refresh Bookings</button>
+
+        <p id="message"></p>
+
+        <div id="bookingList" class="booking-list"></div>
+
+    </div>
+
+    <script src="booking-history.js"></script>
+
+</body>
+</html>

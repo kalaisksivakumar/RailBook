@@ -1,0 +1,203 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailBook - Register</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(0, 20, 45, 0.55),
+                                rgba(0, 20, 45, 0.65)),
+                url("train-bg.png") center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .register-container {
+            width: 390px;
+            padding: 35px;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            color: #07529b;
+            margin-bottom: 8px;
+        }
+
+        .tagline {
+            color: #555;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        h2 {
+            color: #173c61;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #bbb;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #07529b;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            background: #07529b;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            background: #063b70;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: #07529b;
+            font-weight: bold;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="register-container">
+
+        <div class="logo">🚆 RailBook</div>
+
+        <p class="tagline">Your Journey, Our Responsibility</p>
+
+        <h2>Create Account</h2>
+
+        <form id="registerForm">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username"
+                       placeholder="Choose a username" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password"
+                       placeholder="Minimum 8 characters"
+                       minlength="8" required>
+            </div>
+
+            <button type="submit">Register</button>
+
+        </form>
+
+        <p id="message"></p>
+
+        <p class="login-link">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+
+    </div>
+
+    <script>
+        document.getElementById("registerForm")
+            .addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+            const username =
+                document.getElementById("username").value.trim();
+
+            const password =
+                document.getElementById("password").value;
+
+            const message =
+                document.getElementById("message");
+
+            try {
+                const response = await fetch("/api/users/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+
+                const result = await response.text();
+
+                if (response.ok) {
+                    message.style.color = "green";
+                    message.textContent = result;
+
+                    setTimeout(function() {
+                        window.location.href = "login.html";
+                    }, 1500);
+
+                } else {
+                    message.style.color = "red";
+                    message.textContent = result;
+                }
+
+            } catch (error) {
+                message.style.color = "red";
+                message.textContent = "Registration failed. Try again.";
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RailBook - Login</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(10, 30, 55, 0.65), rgba(10, 30, 55, 0.65)),
+                url("https://images.unsplash.com/photo-1474487548417-781cb71495f3")
+                center/cover no-repeat;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: white;
+            padding: 40px 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .logo {
+            text-align: center;
+            color: #17395f;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #17395f;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #344a63;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccd6e2;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2874c7;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 7px;
+            background: #2168ad;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #174d85;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 18px;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #d32f2f;
+        }
+
+        .success {
+            color: #16845c;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 22px;
+            line-height: 2;
+        }
+
+        .links a {
+            color: #2168ad;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        .back-home {
+            display: block;
+            margin-top: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <h1 class="logo">🚆 RailBook</h1>
+
+        <p class="subtitle">Railway Reservation System</p>
+
+        <h2>Login to Your Account</h2>
+
+        <!-- LOGIN FORM -->
+        <form action="/login" method="post">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    autocomplete="username"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required>
+            </div>
+
+            <button type="submit">Login</button>
+
+        </form>
+
+        <div class="message error" id="errorMessage"></div>
+
+        <div class="message success" id="successMessage"></div>
+
+        <div class="links">
+            <p>Don't have an account?
+                <a href="/register.html">Register Here</a>
+            </p>
+
+            <a class="back-home" href="/index.html">
+                ← Back to Home
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get("error") === "true") {
+            document.getElementById("errorMessage").textContent =
+                "Invalid username or password. Please try again.";
+        }
+
+        if (params.has("logout")) {
+            document.getElementById("successMessage").textContent =
+                "You have logged out successfully.";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailBook - Chart Management</title>
+    <link rel="stylesheet" href="css/admin-chart.css">
+</head>
+<body>
+
+    <header>
+        <h2>RailBook Admin</h2>
+        <nav>
+            <a href="admin-dashboard.html">Dashboard</a>
+            <a href="admin-chart.html">Chart Management</a>
+            <a href="index.html">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Train Chart Management</h1>
+        <p>Prepare train charts and view passenger details.</p>
+
+        <section class="card">
+            <h2>Prepare Train Chart</h2>
+
+            <label for="trainId">Enter Train ID</label>
+            <input
+                type="number"
+                id="trainId"
+                placeholder="Enter train ID"
+                min="1"
+            >
+
+            <button id="prepareButton" onclick="prepareChart()">
+                Prepare Chart
+            </button>
+
+            <p id="message"></p>
+        </section>
+
+        <section class="card">
+            <h2>Check Chart Status</h2>
+
+            <label for="statusTrainId">Train ID</label>
+            <input
+                type="number"
+                id="statusTrainId"
+                placeholder="Enter train ID"
+                min="1"
+            >
+
+            <button onclick="checkChartStatus()">
+                Check Status
+            </button>
+
+            <p id="statusMessage"></p>
+        </section>
+
+        <section class="card">
+            <h2>Passenger Chart</h2>
+
+            <label for="passengerTrainId">Train ID</label>
+            <input
+                type="number"
+                id="passengerTrainId"
+                placeholder="Enter train ID"
+                min="1"
+            >
+
+            <button onclick="viewPassengerChart()">
+                View Passengers
+            </button>
+
+            <div id="passengerResult"></div>
+        </section>
+
+        <section class="card">
+            <h2>All Prepared Charts</h2>
+
+            <button onclick="loadAllCharts()">
+                Refresh Charts
+            </button>
+
+            <div id="chartList"></div>
+        </section>
+    </main>
+
+    <script src="js/admin-chart.js"></script>
+</body>
+</html>

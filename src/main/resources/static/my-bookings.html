@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RailBook - My Bookings</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <h1>🚆 RailBook</h1>
+    <p>My Bookings</p>
+</header>
+
+<main>
+
+    <h2>Find Your Booking</h2>
+
+    <div class="booking-search">
+
+        <label for="pnrInput">Enter 10-Digit PNR Number</label>
+
+        <input
+            type="text"
+            id="pnrInput"
+            placeholder="Enter your PNR"
+            maxlength="10"
+            inputmode="numeric"
+        >
+
+        <button type="button" onclick="searchBooking()">
+            Search Booking
+        </button>
+
+    </div>
+
+    <div id="bookingMessage"></div>
+
+    <div id="bookingResult"></div>
+
+    <br>
+
+    <a href="index.html">Back to Home</a>
+
+</main>
+
+<script src="my-bookings.js"></script>
+
+</body>
+</html>

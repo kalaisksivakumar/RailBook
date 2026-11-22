@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RailBook - Railway Reservation</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+            color: #222;
+        }
+
+        header {
+            background: #10243a;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        header h1 {
+            font-size: 27px;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffc107;
+        }
+
+        .hero {
+            min-height: 430px;
+            background:
+                linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+                url("https://images.unsplash.com/photo-1474487548417-781cb71495f3")
+                center/cover no-repeat;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 30px;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 19px;
+        }
+
+        .search-box {
+            background: white;
+            width: 85%;
+            max-width: 900px;
+            margin: -45px auto 40px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px #0002;
+            position: relative;
+        }
+
+        .search-box h2 {
+            margin-bottom: 20px;
+            color: #10243a;
+        }
+
+        .search-fields {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-fields input {
+            flex: 1;
+            min-width: 180px;
+            padding: 13px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #e68900;
+        }
+
+        .features {
+            padding: 35px 7% 60px;
+            text-align: center;
+        }
+
+        .features h2 {
+            color: #10243a;
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 28px 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 12px #0001;
+        }
+
+        .feature-card h3 {
+            color: #10243a;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        #results {
+            margin-top: 20px;
+        }
+
+        .train-card {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 18px;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .train-card h3 {
+            color: #10243a;
+            margin-bottom: 12px;
+        }
+
+        .train-card p {
+            margin: 8px 0;
+        }
+
+        footer {
+            background: #10243a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media(max-width: 600px) {
+            header {
+                flex-direction: column;
+            }
+
+            .hero h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🚆 RailBook</h1>
+
+    <nav>
+        <a href="/index.html">Home</a>
+        <a href="#features">Features</a>
+        <a href="/login.html">Login</a>
+        <a href="/register.html">Register</a>
+        <a href="/admin-login.html">Admin</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h2>Welcome to RailBook</h2>
+    <p>Your journey begins here. Book your train tickets easily!</p>
+</section>
+
+<section class="search-box">
+
+    <h2>Search Trains</h2>
+
+    <div class="search-fields">
+
+        <input
+            type="text"
+            id="source"
+            placeholder="From"
+        >
+
+        <input
+            type="text"
+            id="destination"
+            placeholder="To"
+        >
+
+        <button type="button" id="searchButton">
+            Search Trains
+        </button>
+
+    </div>
+
+    <div id="results"></div>
+
+</section>
+
+<section class="features" id="features">
+
+    <h2>Our Features</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+            <h3>🎫 Easy Booking</h3>
+            <p>Search trains and book your tickets easily.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>💺 Seat Selection</h3>
+            <p>Select your preferred available seats.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>📋 My Bookings</h3>
+            <p>View your railway ticket booking details.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>🔍 PNR Tracking</h3>
+            <p>Check your booking status using your PNR.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>❌ Ticket Cancellation</h3>
+            <p>Cancel your bookings when required.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>📚 Booking History</h3>
+            <p>View your previous booking records.</p>
+        </div>
+
+    </div>
+
+</section>
+
+<footer>
+    <p>© 2026 RailBook. Railway Reservation System.</p>
+</footer>
+
+<script src="./script.js"></script>
+
+<script>
+    document.getElementById("searchButton")
+        .addEventListener("click", function() {
+            if (typeof searchTrains === "function") {
+                searchTrains();
+            } else {
+                document.getElementById("results").innerHTML =
+                    "<p>Search script could not be loaded. Please check script.js.</p>";
+            }
+        });
+</script>
+
+</body>
+</html>
